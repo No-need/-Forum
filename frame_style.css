@@ -1,0 +1,74 @@
+    
+body{
+    margin: 0%;
+    padding: 0%;
+}
+#menu{
+    z-index: 999;
+    background-color:rgb(128, 147, 255);
+    width:100%;
+    height: 50px;
+    position: fixed;
+}
+#search{
+    border-radius: 6px;
+    margin-left: 20%;
+    margin-top: 1%;
+}
+.menulink{/*功能表文字樣式*/
+    float: right;/*靠右浮動*/
+    font-family: "微軟正黑體";
+    font-size: 15px;
+    color: rgb(7, 7, 7);
+}
+    ul { /* 取消ul預設的內縮及樣式 */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.menulink > li {
+    float: left; /* 只有第一層是靠左對齊*/
+    padding: 15px;
+    border-width: 1px;
+    border-style:solid;
+    border-color: black;
+}
+.menulink a{
+    text-decoration:none;
+    display: block;
+}
+.menulink li >ul{
+    display: none;
+}
+.menulink .list:hover > ul { /* 滑鼠滑入展開次選單*/
+    display: block;
+    
+}
+.menulink a:hover{
+    background-color: rgba(255, 255, 255,0.5);
+}
+.dropdown{
+    text-align: right;
+    margin-right: 10px;
+    
+}
+.dropdown li{
+        background-color: rgba(255, 192, 203,0.5);
+}
+.iframe_1{
+    height: 100%; 
+    width: 150px;
+    margin-top: 50px; 
+    position: fixed; 
+    background-color: rgba(0, 0, 0,0.5);
+}
+.iframe_2{
+    height: 100%; 
+    width: 100%;
+    margin-left: 150px; 
+    margin-top: 50px; 
+    position: fixed; 
+    overflow-x: hidden; 
+    overflow-y: scroll;
+
+}
