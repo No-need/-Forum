@@ -1,0 +1,120 @@
+.personal{
+    text-align: center;
+    transition: 0.5s;
+    margin-bottom: 200px;
+}
+
+.personal.long1{
+    margin-bottom: 0px;
+}
+.issue{
+    text-align: center;
+}
+
+
+
+button1{
+    display: block;
+    position: relative;
+    width: 100px;
+    height: 30px;
+    font-size: 24px;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    background-color:black;
+    color: white;
+}
+button1:hover{
+    background-color:rgba(0, 0, 0,0.5);
+    
+}
+
+.btn{
+    display: block;
+    position: relative;
+    width: 100px;
+    height: 30px;
+    font-size: 24px;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    background-color:black;
+    color: white;
+    cursor: pointer;
+}
+.btn:hover{
+    background-color:rgba(0, 0, 0,0.5);
+}
+
+
+
+.ul_1{
+    position: absolute;
+    margin: 0px;
+    width: 100%;
+    transform-origin: top;
+    transform: perspective(1000px) rotateX(0deg);
+    transition: 0.5s;
+    padding: 0px;
+}
+.ul_2{
+    position: absolute;
+    margin: 0px;
+    width: 100%;
+    transform-origin: top;
+    transform: perspective(1000px) rotateX(0deg);
+    transition: 0.5s;
+    padding: 0px;
+}
+
+.ul_1.active1{
+    transform: perspective(1000px) rotateX(-90deg);
+}
+
+
+.ul_2.active2{
+    transform: perspective(1000px) rotateX(-90deg);
+}
+
+
+
+.ul_1 li a {
+    display: block;
+    text-decoration: none;
+    padding: 10px 0;
+    color: white;
+    
+}
+
+
+.ul_1 li a:visited {
+    color: white;
+    background-color:rgba(0, 0, 0,0);
+}
+
+.ul_1 li a:hover {
+    color: red;
+    background-color:rgba(0, 0, 0,0.5);
+}
+
+
+.ul_2 li a {
+    display: block;
+    text-decoration: none;
+    padding: 10px 0;
+    color: white;
+    
+}
+
+
+.ul_2 li a:visited {
+    color: white;
+    background-color:rgba(0, 0, 0,0);
+}
+
+.ul_2 li a:hover {
+    color: red;
+    background-color:rgba(0, 0, 0,0.5);
+}
