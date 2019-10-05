@@ -1,9 +1,4 @@
-<?php
-
-
-
-?>
-
+<?php session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,13 +11,23 @@
 </head>
 <body>
     <div id="menu">
-        <input type="button" value="回首頁" style="" target="change" onclick="location.href='main.php'">
+
+        <input type="button" value="回首頁" style="" target="change" onclick="location.href='main.php'" >
+
         <input type="seach" id="search">    
         <input type="submit" value="search" onclick="">
         <ul class="menulink">
             <li>
-                <a id="login" href="login.php" target="change">登入</a>
-                </li>
+            <?php
+                if(isset($_SESSION['account'])){
+                    echo'<a href="unlogin.php" id="ch_bt" target="change">登出</a>';
+                    
+                }
+                else{
+                    echo'<a href="login.php" id="ch_bt" target="change">登入</a>';
+                }
+            ?>
+            </li>
             <li class="list">
                 <a href="" >功能1</a>
                 <ul>
@@ -55,14 +60,16 @@
 
         </ul>
         <script type="text/javascript">
+        
             $(document).ready(function(){
               $("#menuicon").click(function(){
               $(".dropdown").toggle(0);
               });
             });
+                
         </script>
     </div>
-    
+
     <iframe src="A_menu.html" frameborder="0" class="iframe_1" ></iframe>
     <iframe src="Login_screen.php" name="change" frameborder="0"  class="iframe_2"></iframe>
 
