@@ -2,7 +2,7 @@ body{
     margin: 0%;
     padding: 0%;
     position: fixed; 
-    width:100%;
+    width: 100%;
 }
 #menu{
     background-color:rgb(128, 147, 255);
@@ -10,6 +10,7 @@ body{
     height: 50px;
     z-index: 100;
     position: fixed;
+    
 }
 
 #search{
@@ -19,12 +20,13 @@ body{
 }
 
 
-
 .menulink{/*功能表文字樣式*/
     float: right;/*靠右浮動*/
     font-family: "微軟正黑體";
     font-size: 15px;
     color: rgb(7, 7, 7);
+    
+    
 }
 ul { /* 取消ul預設的內縮及樣式 */
     margin: 0;
@@ -32,7 +34,7 @@ ul { /* 取消ul預設的內縮及樣式 */
     list-style: none;
 }
 .menulink > li {
-    float: left; /* 只有第一層是靠左對齊*/
+    float: left; /* 只有第一層是靠左對齊*/ 
     border-width: 1px;
     border-style:solid;
     border-color: rgb(51, 46, 46);
@@ -57,7 +59,6 @@ ul { /* 取消ul預設的內縮及樣式 */
     margin-right: 10px;
     
 }
-
 .dropdown li{
         background-color: rgba(255, 192, 203,0.5);
 }
@@ -205,7 +206,7 @@ li.selected a{
 
 /*main*/
 .main_s{
-    padding-top:200px;
+    margin-top:200px;
     margin-left:200px;
 }
 
@@ -215,11 +216,12 @@ li.selected a{
     
     margin-left: 150px;
     margin-top: 50px; 
-    border:1px solid red;
+    
+    height: 100vh;
+    border-right:1px solid red;
     display: inline-block;
     overflow-x:hidden;
     overflow-y:scroll;
-    
 }
 .ch_bt{    
     width:30px;
@@ -230,15 +232,33 @@ li.selected a{
     height:300px;
 }
 
-/*show*/
-
 .show{
     display:inline-block;
     position: fixed; 
     border:1px solid blue;
 }
 
+/*
+.show_1{
+    
+    height:100%;
+    width: 100%; 
 
+
+}
+.show_2{
+    display:inline-block;
+    height:100%;
+    width: 100%; 
+   
+    overflow-x: hidden; 
+    overflow-y: scroll;
+    border:1px solid blue;
+    margin-left:300px;
+    margin-top:-150px;
+
+}
+*/
 
 
 /*login*/
@@ -313,6 +333,3 @@ li.selected a{
     list-style:none;
     z-index: 200;
 }
-
-
-

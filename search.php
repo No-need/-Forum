@@ -7,20 +7,88 @@
     <link rel="stylesheet" type="text/css" href="all_style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
-<?php
-    if(isset($_POST['submit'])){
-        $_SESSION['thing']=$_POST['thing'];
-        header("location: search.php");
+
+<script type="text/javascript">
+    var now=0
+    function getStates(value){
+        key = event.keyCode;
+        var show_put=document.getElementById("results");
+        show_put.style.display="block";
+        var slt=document.getElementsByClassName('list_1');
+        var cht=document.getElementById("search");
+        var len = slt.length;
+        if(key==40){    
+            if(now>0 && now<len){
+                slt[now-1].style.color="black";
+                slt[now-1].style.backgroundColor="white";
+                slt[now].style.backgroundColor="rgba(0,0,0,0.5)";
+                cht.value = slt[now].innerHTML;
+                now++;
+            }
+            else if(now==len){
+                slt[now-1].style.color="black";
+                slt[now-1].style.backgroundColor="white";
+                now=0;
+                slt[now].style.backgroundColor="rgba(0,0,0,0.5)";
+                cht.value = slt[now].innerHTML;
+                now++;
+            }
+            else{
+                slt[now].style.backgroundColor="rgba(0,0,0,0.5)";
+                cht.value = slt[now].innerHTML;
+                now++;
+            }
+        }
+        else if(key==38){ //上
+            //key.returnvalue=false;
+            if(now==1){
+                slt[now-1].style.color="black";
+                slt[now-1].style.backgroundColor="white";
+                slt[len-1].style.backgroundColor="rgba(0,0,0,0.5)";
+                cht.value = slt[len-1].innerHTML;
+                now=len;
+            }
+            else{
+                now--;
+                slt[now].style.color="black";
+                slt[now].style.backgroundColor="white";
+                slt[now-1].style.backgroundColor="rgba(0,0,0,0.5)";
+                cht.value = slt[now-1].innerHTML;
+            }
+        }
+        else if(key==39||key==37){
+            
+        }
+        else{
+            $.post("getState.php",{partialState:value},function(data){
+                $("#results").html(data);
+            });
+        }
     }
-?>
-
-
-<body>
-    <div id="menu">
+    function text_on(clk_me){
+        var cht=document.getElementById("search");
+        cht.value = clk_me.innerHTML;
+    }
+    function hid_search(){
+        //alert("sad");
+        var show_put=document.getElementById("results");
+        if(show_put.style.display=="block"){
+            //alert("sad");
+            show_put.style.display="none";
+        }
+    }
+</script>
+<body onclick="hid_search()">
+<div id="menu">
+    
         <input type="button" value="回首頁" style="" target="change" onclick="location.href='main.php'" >
-    <form style="display:inline" method="post" action="main.php" > 
-        <input type="search" name="thing" id="search">    
-        <input type="submit" value="收尋" name="submit">
+    
+    <form style="display:inline;" method="get" action="search.php" > 
+        
+        <input type="text" name="thing" onkeyup="getStates(this.value)" id="search" autocomplete="off" >    
+        <input type="submit" value="收尋" name="submit"  >
+
+        <div id="results" style="width:200px;background-color: white;display:none;margin-left: 330px; z-index: 300; position: fixed;"><ul></ul></div>    
     </form>
         
     
@@ -91,16 +159,16 @@
         </div>
     </div>
 <div class="search_s">
+<div>
 <?php
-    session_start();
 
-    if(isset($_SESSION['thing'])){
+
+    if(isset($_GET['thing'])){
         
         $db = mysqli_connect("localhost","root","","work");
 
-        mysqli_query($db,"SET NAMES utf8");
-        $thing=$_SESSION['thing'];    
-        
+        mysqli_query($db,"SET NAMES utf8");    
+        $thing=$_GET['thing'];
         $result = mysqli_query($db,"SELECT * FROM sell where sellname LIKE \"%$thing%\"");
                 
         while($row = mysqli_fetch_array($result)){
@@ -116,6 +184,7 @@
         echo'<div style="margin-top:100px;"></div>';
     }
     ?>
+</div>
 </div>
 </body>
 </html>
