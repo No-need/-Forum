@@ -1,0 +1,318 @@
+body{
+    margin: 0%;
+    padding: 0%;
+    position: fixed; 
+    width:100%;
+}
+#menu{
+    background-color:rgb(128, 147, 255);
+    width:100%;
+    height: 50px;
+    z-index: 100;
+    position: fixed;
+}
+
+#search{
+    border-radius: 6px;
+    margin-left: 20%;
+    margin-top: 1%;
+}
+
+
+
+.menulink{/*功能表文字樣式*/
+    float: right;/*靠右浮動*/
+    font-family: "微軟正黑體";
+    font-size: 15px;
+    color: rgb(7, 7, 7);
+}
+ul { /* 取消ul預設的內縮及樣式 */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.menulink > li {
+    float: left; /* 只有第一層是靠左對齊*/
+    border-width: 1px;
+    border-style:solid;
+    border-color: rgb(51, 46, 46);
+    padding: 15px;
+}
+.menulink a{
+    text-decoration:none;
+    display: block;
+}
+.menulink li >ul{
+    display: none;
+}
+.menulink .list:hover > ul { /* 滑鼠滑入展開次選單*/
+    display: block;
+    
+}
+.menulink a:hover{
+    background-color: rgba(255, 255, 255,0.5);
+}
+.dropdown{
+    text-align: right;
+    margin-right: 10px;
+    
+}
+
+.dropdown li{
+        background-color: rgba(255, 192, 203,0.5);
+}
+.iframe_1{
+    height: 100%; 
+    width: 150px;
+    margin-top: 50px; 
+    position: fixed; 
+    background-color: rgba(0, 0, 0,0.5);
+}
+.iframe_2{
+    height: 100%; 
+    width: 100%;
+    margin-left: 150px; 
+    margin-top: 50px; 
+    position: fixed; 
+    overflow-x: hidden; 
+    overflow-y: scroll;
+
+}
+
+/*周*/
+
+.personal{
+    text-align: center;
+    transition: 0.5s;
+    margin-bottom: 200px;
+}
+
+.personal.long1{
+    margin-bottom: 0px;
+}
+.issue{
+    text-align: center;
+}
+
+.body_1{
+    overflow-x: hidden;
+    color: white;
+    height: 100%; 
+    width: 150px;
+    margin-top: 50px; 
+    position: fixed; 
+    background-color: rgba(0, 0, 0,0.5);
+    z-index: 50;
+    margin-bottom:200px;
+}
+
+button1{
+    display: block;
+    position: relative;
+    width: 100px;
+    height: 30px;
+    font-size: 24px;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    background-color:black;
+    color: white;
+}
+button1:hover{
+    background-color:rgba(0, 0, 0,0.5);
+}
+
+.btn{
+    display: block;
+    position: relative;
+    width: 100px;
+    height: 30px;
+    font-size: 24px;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    background-color:black;
+    color: white;
+    cursor: pointer;
+}
+.btn:hover{
+    background-color:rgba(0, 0, 0,0.5);
+}
+
+
+.ul_1{
+    position: absolute;
+    margin: 0px;
+    width: 100%;
+    transform-origin: top;
+    transform: perspective(1000px) rotateX(0deg);
+    transition: 0.5s;
+    padding: 0px;
+}
+.ul_2{
+    position: absolute;
+    margin: 0px;
+    width: 100%;
+    transform-origin: top;
+    transform: perspective(1000px) rotateX(0deg);
+    transition: 0.5s;
+    padding: 0px;
+}
+
+.ul_1.active1{
+    transform: perspective(1000px) rotateX(-90deg);
+}
+
+
+.ul_2.active2{
+    transform: perspective(1000px) rotateX(-90deg);
+}
+
+
+
+.ul_1 li a {
+    display: block;
+    text-decoration: none;
+    padding: 10px 0;
+    color: white;
+}
+.ul_1 li a:hover {
+    color: red;
+    background-color:rgba(0, 0, 0,0.5);
+}
+
+.ul_2 li a {
+    display: block;
+    text-decoration: none;
+    padding: 10px 0;
+    color: white;
+    
+}
+
+.ul_2 li a:hover {
+    color: red;
+    background-color:rgba(0, 0, 0,0.5);
+}
+
+li.selected {
+    
+    background-color:rgba(0, 0, 0,0.5);
+}
+li.selected a{
+    color: red;
+}
+
+/*main*/
+.main_s{
+    padding-top:200px;
+    margin-left:200px;
+}
+
+/*Personal_end*/
+
+.upload_ph{
+    
+    margin-left: 150px;
+    margin-top: 50px; 
+    border:1px solid red;
+    display: inline-block;
+    overflow-x:hidden;
+    overflow-y:scroll;
+    
+}
+.ch_bt{    
+    width:30px;
+    height:30px;
+}
+.ph{
+    width:300px;
+    height:300px;
+}
+
+/*show*/
+
+.show{
+    display:inline-block;
+    position: fixed; 
+    border:1px solid blue;
+}
+
+
+
+
+/*login*/
+.login_s{
+    height:100%;
+    width: 100%; 
+   
+    margin-left: 400px;
+    margin-top: 200px;
+    border:1px solid red;
+}
+
+/*sell*/
+.sell_s{
+    margin-left: 150px;
+    margin-top: 50px;
+    width:20%;
+    border:3px solid red;
+    padding: 200px 200px;
+}
+
+/*sign*/
+.sign_s{
+    height:100%;
+    width: 100%; 
+   
+    margin-left: 400px;
+    margin-top: 200px;
+    border:1px solid red;
+}
+
+.Data-Content {
+    width: 100%; /* 表單寬度 */
+    line-height: 40px;
+    
+}
+
+.Data-Title {
+    float: left;
+    width: 25%; /* Label寬度，視情況調整 */
+    margin-right: 20px;
+    
+}
+
+.Data-Items {
+    float: left;
+    width: 25%;
+    
+}
+
+.AlignRight {
+    text-align: right;
+
+}
+
+
+/*search*/
+.search_s{
+    margin-left: 150px;
+    margin-top: 50px; 
+    width:600px;
+    height: 100vh;
+    border-right:1px solid red;
+    display: inline-block;
+    overflow-x:hidden;
+    overflow-y:scroll;
+    transition: 2s;
+}
+
+/*search_box*/
+.list_1{
+    list-style:none;
+    z-index: 200;
+}
+
+
+

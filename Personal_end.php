@@ -7,9 +7,13 @@
        // $upload = $_POST['upload'];
         $image = $_FILES['image']['name'];
         $text = mysqli_real_escape_string($db, $_POST['text']);
-        $target = "../".basename($image);
         $account=$_SESSION['account'];
-        $sql = "INSERT INTO images(account,image,text) VALUES ('$account','$image','$text')";
+        $target = "../".$account.basename(date("Y_m_d_H_i_s").$image);
+        $date = date("Y_m_d_H_i_s");
+        
+        
+        $imgn = $account.basename(date("Y_m_d_H_i_s").$image);
+        $sql = "INSERT INTO images(account,image,text) VALUES ('$account','$imgn','$text')";
         mysqli_query($db,$sql);
         if(move_uploaded_file($_FILES['image']['tmp_name'],$target)){
             $msg = "上傳成功";
@@ -26,22 +30,98 @@
 ?>
 <html>
     <head>
+    <link rel="icon" href="圖示網址/favicon.png" type="image/ico" />
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="all_style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     </head>
-    <body>
+    <script type="text/javascript">
+    var now=0
+    function getStates(value){
+        key = event.keyCode;
+        var show_put=document.getElementById("results");
+        show_put.style.display="block";
+        var slt=document.getElementsByClassName('list_1');
+        var cht=document.getElementById("search");
+        var len = slt.length;
+        if(key==40){    
+            if(now>0 && now<len){
+                slt[now-1].style.color="black";
+                slt[now-1].style.backgroundColor="white";
+                slt[now].style.backgroundColor="rgba(0,0,0,0.5)";
+                cht.value = slt[now].innerHTML;
+                now++;
+            }
+            else if(now==len){
+                slt[now-1].style.color="black";
+                slt[now-1].style.backgroundColor="white";
+                now=0;
+                slt[now].style.backgroundColor="rgba(0,0,0,0.5)";
+                cht.value = slt[now].innerHTML;
+                now++;
+            }
+            else{
+                slt[now].style.backgroundColor="rgba(0,0,0,0.5)";
+                cht.value = slt[now].innerHTML;
+                now++;
+            }
+        }
+        else if(key==38){ //上
+            //key.returnvalue=false;
+            if(now==1){
+                slt[now-1].style.color="black";
+                slt[now-1].style.backgroundColor="white";
+                slt[len-1].style.backgroundColor="rgba(0,0,0,0.5)";
+                cht.value = slt[len-1].innerHTML;
+                now=len;
+            }
+            else{
+                now--;
+                slt[now].style.color="black";
+                slt[now].style.backgroundColor="white";
+                slt[now-1].style.backgroundColor="rgba(0,0,0,0.5)";
+                cht.value = slt[now-1].innerHTML;
+            }
+        }
+        else if(key==39||key==37){
+            
+        }
+        else{
+            $.post("getState.php",{partialState:value},function(data){
+                $("#results").html(data);
+            });
+        }
+    }
+    function text_on(clk_me){
+        var cht=document.getElementById("search");
+        cht.value = clk_me.innerHTML;
+    }
+    function hid_search(){
+        //alert("sad");
+        var show_put=document.getElementById("results");
+        if(show_put.style.display=="block"){
+            //alert("sad");
+            show_put.style.display="none";
+        }
+    }
+</script>
 
-    <div id="menu">
+
+<body onclick="hid_search()">
+<div id="menu">
         <input type="button" value="回首頁" style="" target="change" onclick="location.href='main.php'" >
-        <form style="display:inline" method="post" action="main.php" > 
-            <input type="search" name="thing" id="search">    
-            <input type="submit" value="收尋" name="submit">
-        </form>
+    
+    <form style="display:inline;" method="get" action="search.php"> 
+        
+        <input type="text" name="thing" onkeyup="getStates(this.value)" id="search" autocomplete="off" >    
+        <input type="submit" value="收尋" name="submit"  >
+
+        <div id="results" style="width:200px;background-color: white;display:none;margin-left: 330px; z-index: 300; position: fixed;"><ul></ul></div>    
+    </form>
 
         <ul class="menulink">
-            <li>
+            <li >
             <?php
                 if(isset($_SESSION['account'])){
                     echo'<a href="unlogin.php" id="ch_bt">登出</a>';
@@ -184,7 +264,7 @@
                         echo "<div contenteditable=\"true\" >".$row['text']."</div>";
                         
                         if(isset($_SESSION['account'])){
-                            if($_SESSION['account']==$row['account']){
+                            if($_SESSION['account']==$row['account']||$_SESSION['account']=='root'){
                             echo '<input type="button" id="change" name="change" value="編輯" onclick="updatetext()">';
                             echo '<input type="button" id="delete" name="delete" value="刪除" onclick="delt_img('.$row['id'].')">';   //src=".png" class=\"ch_bt\"
                             echo '<input type="button" id="save" name="save" value="儲存" onclick="updatetext()">';
@@ -195,7 +275,7 @@
 
             ?>
 
-            <form method="POST" action="Personal_end2.php" enctype="multipart/form-data">
+            <form method="POST" action="Personal_end.php" enctype="multipart/form-data">
                 
                     <?php
                     if(!isset($_SESSION['account'])){

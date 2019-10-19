@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>message</title>
     <?php
-    echo "helloworld";/*
+    
     $con = mysqli_connect('localhost','root','','test');//主機,帳號,密碼,資料庫/server,id,password,database
     if($con){
         echo "connect success";
@@ -35,8 +35,8 @@
           echo "数据插入成功\n";
           mysqli_close($con);
     }
-*/
-    echo  $_SESSION['account'];
+
+    
     $mysqli = new mysqli("localhost","root","",'work');
     $mysqli->query("SET NAMES utf8"); 
     $sql ="INSERT INTO posts (title,content,account,views,created_at,updated_at) VALUES(?,?,?,?,?,?)";
@@ -50,29 +50,13 @@
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param('ssssss',$title,$content,$account,$views, $created_at,$updated_at);
     $stmt->execute();
+    header("location: show.php");
     }
     ?>
 
 </head>
-<body>
-<form action="message.php" method="post">
-<table border="1">
-  <tr>
-    <td><font size="2">title:</font></td>
-    <td><input type="text" size="5" name="title"/></td>
-  </tr>
-  <tr>
-    <td><font size="2">留言內容:</font></td>    
-    <td>
-       <textarea name="content" rows="4" cols="30"></textarea>
-    </td>
-  </tr>
-  <tr>    
-    <td colspan="2" align="center">
-    <input type="submit" name="Send" value="送出留言"/>
-    <input type="reset" name="Reset" value="重設欄位"/></td>
-  </tr>
-</table>
-</form>
+<body style='vertical-align:middle;text-align:center'>
+
+
 </body>
 </html>
