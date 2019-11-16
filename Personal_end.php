@@ -2,27 +2,27 @@
     session_start();
     $db = mysqli_connect("localhost","root","","work");
     $result = mysqli_query($db,"SELECT image,text FROM images");
-    mysqli_query($db,"set name utf-8");
+    mysqli_query($db,"SET NAMES utf8");
     if(isset($_POST['upload'])){
        // $upload = $_POST['upload'];
         $image = $_FILES['image']['name'];
         $text = mysqli_real_escape_string($db, $_POST['text']);
         $account=$_SESSION['account'];
-        $target = "../".$account.basename(date("Y_m_d_H_i_s").$image);
+        $target = "../".$account."_".basename(date("Y_m_d_H_i_s").$image);
         $date = date("Y_m_d_H_i_s");
         
         
-        $imgn = $account.basename(date("Y_m_d_H_i_s").$image);
+        $imgn = $account."_".basename(date("Y_m_d_H_i_s").$image);
         $sql = "INSERT INTO images(account,image,text) VALUES ('$account','$imgn','$text')";
         mysqli_query($db,$sql);
         if(move_uploaded_file($_FILES['image']['tmp_name'],$target)){
             $msg = "上傳成功";
-            echo "<script>alert($account)</script>";
+            //echo "<script>alert('$msg')</script>";
             
         }
         else{
             $msg = "上傳失敗";
-            echo "<script>alert('$msg')</script>";
+            //echo "<script>alert('$msg')</script>";
         }
     }
 
@@ -35,78 +35,8 @@
         <link rel="stylesheet" type="text/css" href="all_style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <script src="search_box.js" type="text/javascript"></script>
     </head>
-    <script type="text/javascript">
-    var now=0
-    function getStates(value){
-        key = event.keyCode;
-        var show_put=document.getElementById("results");
-        show_put.style.display="block";
-        var slt=document.getElementsByClassName('list_1');
-        var cht=document.getElementById("search");
-        var len = slt.length;
-        if(key==40){    
-            if(now>0 && now<len){
-                slt[now-1].style.color="black";
-                slt[now-1].style.backgroundColor="white";
-                slt[now].style.backgroundColor="rgba(0,0,0,0.5)";
-                cht.value = slt[now].innerHTML;
-                now++;
-            }
-            else if(now==len){
-                slt[now-1].style.color="black";
-                slt[now-1].style.backgroundColor="white";
-                now=0;
-                slt[now].style.backgroundColor="rgba(0,0,0,0.5)";
-                cht.value = slt[now].innerHTML;
-                now++;
-            }
-            else{
-                slt[now].style.backgroundColor="rgba(0,0,0,0.5)";
-                cht.value = slt[now].innerHTML;
-                now++;
-            }
-        }
-        else if(key==38){ //上
-            //key.returnvalue=false;
-            if(now==1){
-                slt[now-1].style.color="black";
-                slt[now-1].style.backgroundColor="white";
-                slt[len-1].style.backgroundColor="rgba(0,0,0,0.5)";
-                cht.value = slt[len-1].innerHTML;
-                now=len;
-            }
-            else{
-                now--;
-                slt[now].style.color="black";
-                slt[now].style.backgroundColor="white";
-                slt[now-1].style.backgroundColor="rgba(0,0,0,0.5)";
-                cht.value = slt[now-1].innerHTML;
-            }
-        }
-        else if(key==39||key==37){
-            
-        }
-        else{
-            $.post("getState.php",{partialState:value},function(data){
-                $("#results").html(data);
-            });
-        }
-    }
-    function text_on(clk_me){
-        var cht=document.getElementById("search");
-        cht.value = clk_me.innerHTML;
-    }
-    function hid_search(){
-        //alert("sad");
-        var show_put=document.getElementById("results");
-        if(show_put.style.display=="block"){
-            //alert("sad");
-            show_put.style.display="none";
-        }
-    }
-</script>
-
 
 <body onclick="hid_search()">
 <div id="menu">
@@ -302,8 +232,7 @@
                     
 
             <div class='show'  style='padding-left:5px;'>
-                    <iframe src="show.php" frameborder="0" class='show' style='    overflow-x: hidden; 
-    overflow-y: scroll;height:100vh;width: 100%; '></iframe>
+                <iframe src="show.php" frameborder="0" class='show' style='overflow-x: hidden;overflow-y: scroll;height:100vh;width: 100%; '></iframe>
             </div>
 
 </div>
